@@ -1,4 +1,46 @@
-2021-07-05 17:24:11,157 ERROR: Exception on /search [GET] [in /home/darkknight/anaconda3/lib/python3.7/site-packages/flask/app.py:1891]
+2021-07-16 16:43:05,945 ERROR: Exception on /index [POST] [in /home/darkknight/anaconda3/lib/python3.7/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/urllib3/connection.py", line 157, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/urllib3/util/connection.py", line 84, in create_connection
+    raise err
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/urllib3/util/connection.py", line 74, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/connection/http_urllib3.py", line 252, in perform_request
+    method, url, body, retries=Retry(False), headers=request_headers, **kw
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/urllib3/connectionpool.py", line 720, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/urllib3/util/retry.py", line 376, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/urllib3/packages/six.py", line 735, in reraise
+    raise value
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/urllib3/connectionpool.py", line 672, in urlopen
+    chunked=chunked,
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/urllib3/connectionpool.py", line 387, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/home/darkknight/anaconda3/lib/python3.7/http/client.py", line 1252, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/home/darkknight/anaconda3/lib/python3.7/http/client.py", line 1298, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/home/darkknight/anaconda3/lib/python3.7/http/client.py", line 1247, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/home/darkknight/anaconda3/lib/python3.7/http/client.py", line 1026, in _send_output
+    self.send(msg)
+  File "/home/darkknight/anaconda3/lib/python3.7/http/client.py", line 966, in send
+    self.connect()
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/urllib3/connection.py", line 184, in connect
+    conn = self._new_conn()
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/urllib3/connection.py", line 169, in _new_conn
+    self, "Failed to establish a new connection: %s" % e
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7fd02c0b8110>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
 Traceback (most recent call last):
   File "/home/darkknight/anaconda3/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
     response = self.full_dispatch_request()
@@ -14,72 +56,28 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/home/darkknight/anaconda3/lib/python3.7/site-packages/flask_login/utils.py", line 272, in decorated_view
     return func(*args, **kwargs)
-  File "/home/darkknight/microblog/app/main/routes.py", line 152, in search
-    current_app.config['POSTS_PER_PAGE'])
-  File "/home/darkknight/microblog/app/models.py", line 15, in search
-    ids, total = query_index(cls.__tablename__, expression, page, per_page)
-  File "/home/darkknight/microblog/app/search.py", line 22, in query_index
-    'from': (page - 1) * per_page, 'size': per_page})
+  File "/home/darkknight/microblog/app/main/routes.py", line 36, in index
+    db.session.commit()
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/scoping.py", line 162, in do
+    return getattr(self.registry(), name)(*args, **kwargs)
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 1036, in commit
+    self.transaction.commit()
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/sqlalchemy/orm/session.py", line 510, in commit
+    self.session.dispatch.after_commit(self.session)
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/sqlalchemy/event/attr.py", line 261, in __call__
+    fn(*args, **kw)
+  File "/home/darkknight/microblog/app/models.py", line 37, in after_commit
+    add_to_index(obj.__tablename__, obj)
+  File "/home/darkknight/microblog/app/search.py", line 10, in add_to_index
+    current_app.elasticsearch.index(index=index, id=model.id, body=payload)
   File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/client/utils.py", line 168, in _wrapped
     return func(*args, params=params, headers=headers, **kwargs)
-  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/client/__init__.py", line 1675, in search
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/client/__init__.py", line 411, in index
     body=body,
-  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/transport.py", line 415, in perform_request
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/transport.py", line 413, in perform_request
     raise e
   File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/transport.py", line 388, in perform_request
     timeout=timeout,
-  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/connection/http_urllib3.py", line 275, in perform_request
-    self._raise_error(response.status, raw_data)
-  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/connection/base.py", line 331, in _raise_error
-    status_code, error_message, additional_info
-elasticsearch.exceptions.NotFoundError: NotFoundError(404, 'index_not_found_exception', 'no such index [post]', post, index_or_alias)
-2021-07-05 18:50:28,436 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:77]
-2021-07-05 18:50:47,988 ERROR: Exception on /search [GET] [in /home/darkknight/anaconda3/lib/python3.7/site-packages/flask/app.py:1891]
-Traceback (most recent call last):
-  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
-    raise value
-  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/flask_login/utils.py", line 272, in decorated_view
-    return func(*args, **kwargs)
-  File "/home/darkknight/microblog/app/main/routes.py", line 153, in search
-    current_app.config['POSTS_PER_PAGE'])
-  File "/home/darkknight/microblog/app/models.py", line 15, in search
-    ids, total = query_index(cls.__tablename__, expression, page, per_page)
-  File "/home/darkknight/microblog/app/search.py", line 25, in query_index
-    'from': (page - 1) * per_page, 'size': per_page})
-  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/client/utils.py", line 168, in _wrapped
-    return func(*args, params=params, headers=headers, **kwargs)
-  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/client/__init__.py", line 1675, in search
-    body=body,
-  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/transport.py", line 415, in perform_request
-    raise e
-  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/transport.py", line 388, in perform_request
-    timeout=timeout,
-  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/connection/http_urllib3.py", line 275, in perform_request
-    self._raise_error(response.status, raw_data)
-  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/connection/base.py", line 331, in _raise_error
-    status_code, error_message, additional_info
-elasticsearch.exceptions.NotFoundError: NotFoundError(404, 'index_not_found_exception', 'no such index [post]', post, index_or_alias)
-2021-07-06 23:33:10,758 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:77]
-2021-07-06 23:51:06,899 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:77]
-2021-07-06 23:59:08,908 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:77]
-2021-07-07 15:38:29,741 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:82]
-2021-07-07 15:38:48,713 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:82]
-2021-07-07 15:50:25,071 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:82]
-2021-07-07 15:53:38,249 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:82]
-2021-07-07 15:54:00,286 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:82]
-2021-07-07 15:56:37,939 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:82]
-2021-07-16 15:54:54,775 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:82]
-2021-07-16 15:55:08,639 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:82]
-2021-07-16 16:02:26,732 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:82]
-2021-07-16 16:04:31,847 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:82]
-2021-07-16 16:04:38,486 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:82]
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/connection/http_urllib3.py", line 264, in perform_request
+    raise ConnectionError("N/A", str(e), e)
+elasticsearch.exceptions.ConnectionError: ConnectionError(<urllib3.connection.HTTPConnection object at 0x7fd02c0b8110>: Failed to establish a new connection: [Errno 111] Connection refused) caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x7fd02c0b8110>: Failed to establish a new connection: [Errno 111] Connection refused)

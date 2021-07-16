@@ -1,0 +1,99 @@
+2021-07-01 11:58:58,114 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:43]
+2021-07-01 12:00:11,411 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:43]
+2021-07-01 12:00:51,806 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:43]
+2021-07-01 12:01:10,502 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:43]
+2021-07-01 14:30:52,816 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:45]
+2021-07-02 13:50:11,252 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:47]
+2021-07-02 14:20:47,577 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:49]
+2021-07-02 15:14:41,901 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:52]
+2021-07-02 15:27:07,752 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:52]
+2021-07-02 15:27:39,807 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:52]
+2021-07-02 15:27:55,769 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:52]
+2021-07-02 15:29:02,203 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:52]
+2021-07-02 15:29:05,354 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:52]
+2021-07-04 14:48:42,205 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:52]
+2021-07-04 14:48:55,905 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:52]
+2021-07-04 23:23:23,830 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:52]
+2021-07-04 23:23:33,410 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:52]
+2021-07-04 23:54:21,651 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:52]
+2021-07-05 00:14:37,939 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:52]
+2021-07-05 00:19:09,236 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:52]
+2021-07-05 00:19:48,907 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:52]
+2021-07-05 00:24:15,789 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:52]
+2021-07-05 12:42:58,216 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:74]
+2021-07-05 12:48:46,403 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:74]
+2021-07-05 12:54:04,731 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:74]
+2021-07-05 16:04:10,820 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:78]
+2021-07-05 16:27:37,414 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:78]
+2021-07-05 17:18:54,432 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:78]
+2021-07-05 17:22:21,680 ERROR: Exception on /search [GET] [in /home/darkknight/anaconda3/lib/python3.7/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/flask_login/utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "/home/darkknight/microblog/app/main/routes.py", line 152, in search
+    current_app.config['POSTS_PER_PAGE'])
+  File "/home/darkknight/microblog/app/models.py", line 15, in search
+    ids, total = query_index(cls.__tablename__, expression, page, per_page)
+  File "/home/darkknight/microblog/app/search.py", line 22, in query_index
+    'from': (page - 1) * per_page, 'size': per_page})
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/client/utils.py", line 168, in _wrapped
+    return func(*args, params=params, headers=headers, **kwargs)
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/client/__init__.py", line 1675, in search
+    body=body,
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/transport.py", line 415, in perform_request
+    raise e
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/transport.py", line 388, in perform_request
+    timeout=timeout,
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/connection/http_urllib3.py", line 275, in perform_request
+    self._raise_error(response.status, raw_data)
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/connection/base.py", line 331, in _raise_error
+    status_code, error_message, additional_info
+elasticsearch.exceptions.NotFoundError: NotFoundError(404, 'index_not_found_exception', 'no such index [post]', post, index_or_alias)
+2021-07-05 17:22:46,839 ERROR: Exception on /search [GET] [in /home/darkknight/anaconda3/lib/python3.7/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/flask_login/utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "/home/darkknight/microblog/app/main/routes.py", line 152, in search
+    current_app.config['POSTS_PER_PAGE'])
+  File "/home/darkknight/microblog/app/models.py", line 15, in search
+    ids, total = query_index(cls.__tablename__, expression, page, per_page)
+  File "/home/darkknight/microblog/app/search.py", line 22, in query_index
+    'from': (page - 1) * per_page, 'size': per_page})
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/client/utils.py", line 168, in _wrapped
+    return func(*args, params=params, headers=headers, **kwargs)
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/client/__init__.py", line 1675, in search
+    body=body,
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/transport.py", line 415, in perform_request
+    raise e
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/transport.py", line 388, in perform_request
+    timeout=timeout,
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/connection/http_urllib3.py", line 275, in perform_request
+    self._raise_error(response.status, raw_data)
+  File "/home/darkknight/anaconda3/lib/python3.7/site-packages/elasticsearch/connection/base.py", line 331, in _raise_error
+    status_code, error_message, additional_info
+elasticsearch.exceptions.NotFoundError: NotFoundError(404, 'index_not_found_exception', 'no such index [post]', post, index_or_alias)
+2021-07-05 17:23:46,544 INFO: Microblog startup [in /home/darkknight/microblog/app/__init__.py:78]
